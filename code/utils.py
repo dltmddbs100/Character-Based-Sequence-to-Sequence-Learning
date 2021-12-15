@@ -68,15 +68,15 @@ def fitting_visualize(x_train, y_train, x_val, y_val, model, epochs, batch_size,
     model.fit(x_train,y_train, batch_size=batch_size, epochs=1, validation_data=(x_val, y_val))
 
     for i in range(10):
-      ind = np.random.randint(0, len(x_val)) # x_val 개수인 5000개 중 랜덤 index값 설정
-      rowx, rowy = x_val[np.array([ind])], y_val[np.array([ind])] # 해당 index 값의 x_val, y_val을 설정
+      ind = np.random.randint(0, len(x_val)) # Set a random index value among 5000 x_val
+      rowx, rowy = x_val[np.array([ind])], y_val[np.array([ind])] # Set x_val, y_val of the corresponding index value
 
-      # 모델로 예측확률의 최대값을 preds에 할당
+      # Assign the maximum value of the prediction probability to preds with the model
       preds = np.argmax(model.predict(rowx), axis=-1) 
 
-      q = ctable.decode(rowx[0]) # decode로 실제 질문을 추출
-      correct = ctable.decode(rowy[0]) # decode로 실제 답을 추출
-      guess = ctable.decode(preds[0], calc_argmax=False) # decode로 예측결과 답을 추출
+      q = ctable.decode(rowx[0]) # extract the actual question with decode
+      correct = ctable.decode(rowy[0]) # extract the actual answer with decode
+      guess = ctable.decode(preds[0], calc_argmax=False) # extract the prediction result with decode
     
       print("Q", q, end=" ")
       print("T", correct, end=" ")
